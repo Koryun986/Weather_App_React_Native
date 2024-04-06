@@ -23,11 +23,7 @@ function App(): React.JSX.Element {
       />
       <NavigationContainer>
         <Stack.Navigator initialRouteName={'Home'}>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            // options={{title: 'Welcome'}}
-          />
+          <Stack.Screen name="Home" component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
