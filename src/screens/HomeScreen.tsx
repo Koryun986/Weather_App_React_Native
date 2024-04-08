@@ -8,6 +8,7 @@ import {useEffect, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import useDebounce from '../hooks/useDebounce';
 import {SearchBar} from 'react-native-screens';
+import SearchCityOptionsLayout from '../components/SearchCityOptionsLayout';
 
 const HomeScreen = ({
   navigation,
@@ -31,6 +32,9 @@ const HomeScreen = ({
 
   return (
     <View>
+      {isSearchBarOpen && (
+        <SearchCityOptionsLayout cityName={debouncedSearchCityValue} />
+      )}
       <Text>Home Screen</Text>
     </View>
   );
