@@ -4,10 +4,12 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import useDebounce from '../hooks/useDebounce';
 import SearchCityOptionsLayout from '../components/search-city/SearchCityOptionsLayout';
 import Geolocation from '@react-native-community/geolocation';
+import {COLOR_PRIMARY} from '../utils/styles/color-constants';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLOR_PRIMARY,
   },
 });
 

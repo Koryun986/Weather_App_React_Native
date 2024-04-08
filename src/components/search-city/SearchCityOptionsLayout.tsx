@@ -9,6 +9,10 @@ import {
 import api from '../../api/index';
 import SearchCityOption from './SearchCityOption';
 import type {City} from '../../types/api-types';
+import {
+  COLOR_PRIMARY,
+  TRANSPARENT_COLOR_PRIMARY,
+} from '../../utils/styles/color-constants';
 
 interface SearchCityOptionsLayoutProps {
   cityName: string;
@@ -20,7 +24,7 @@ const styles = StyleSheet.create({
     top: 0,
     zIndex: 100,
     width: '100%',
-    backgroundColor: 'gainsboro',
+    backgroundColor: COLOR_PRIMARY,
   },
 });
 
