@@ -9,10 +9,7 @@ import {
 import api from '../../api/index';
 import SearchCityOption from './SearchCityOption';
 import type {City} from '../../types/api-types';
-import {
-  COLOR_PRIMARY,
-  TRANSPARENT_COLOR_PRIMARY,
-} from '../../utils/styles/color-constants';
+import {COLOR_PRIMARY} from '../../utils/styles/color-constants';
 
 interface SearchCityOptionsLayoutProps {
   cityName: string;

@@ -5,7 +5,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import HomeScreen from './src/screens/HomeScreen';
 import {
-  COLOR_PRIMARY,
   COLOR_SECONDARY,
   TRANSPARENT_COLOR_PRIMARY,
 } from './src/utils/styles/color-constants';
