@@ -7,6 +7,7 @@ import {
 import {useEffect, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import useDebounce from '../hooks/useDebounce';
+import {SearchBar} from 'react-native-screens';
 
 const HomeScreen = ({
   navigation,
@@ -14,6 +15,7 @@ const HomeScreen = ({
   navigation: NativeStackNavigationProp<any>['navigation'];
 }) => {
   const [searchCityValue, setSearchCityValue] = useState('');
+  const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
   const debouncedSearchCityValue = useDebounce(searchCityValue);
 
   useEffect(() => {
@@ -21,6 +23,8 @@ const HomeScreen = ({
       headerSearchBarOptions: {
         placeholder: 'Search city...',
         onChangeText: e => setSearchCityValue(e.nativeEvent.text),
+        onOpen: () => setIsSearchBarOpen(true),
+        onClose: () => setIsSearchBarOpen(false),
       },
     });
   }, [navigation]);
