@@ -1,14 +1,14 @@
-import {
-  NativeSyntheticEvent,
-  Text,
-  TextInputFocusEventData,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {useEffect, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import useDebounce from '../hooks/useDebounce';
-import {SearchBar} from 'react-native-screens';
-import SearchCityOptionsLayout from '../components/SearchCityOptionsLayout';
+import SearchCityOptionsLayout from '../components/search-city/SearchCityOptionsLayout';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 const HomeScreen = ({
   navigation,
@@ -31,7 +31,7 @@ const HomeScreen = ({
   }, [navigation]);
 
   return (
-    <View>
+    <View style={styles.container}>
       {isSearchBarOpen && (
         <SearchCityOptionsLayout cityName={debouncedSearchCityValue} />
       )}
