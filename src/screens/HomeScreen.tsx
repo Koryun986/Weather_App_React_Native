@@ -1,10 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {RefreshControl, StyleSheet, Text, View} from 'react-native';
 import {useEffect, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import useDebounce from '../hooks/useDebounce';
 import SearchCityOptionsLayout from '../components/search-city/SearchCityOptionsLayout';
 import Geolocation from '@react-native-community/geolocation';
 import {COLOR_PRIMARY} from '../utils/styles/color-constants';
+import WeatherDashboard from '../components/weather-dashboard/WeatherDashboard';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,18 +37,14 @@ const HomeScreen = ({
   }, [navigation]);
 
   useEffect(() => {
-    return () => {
-      Geolocation.getCurrentPosition(
-        position => {
-          setPosition(
-            `${position.coords.latitude},${position.coords.longitude}`,
-          );
-        },
-        e => {
-          setError(e.message);
-        },
-      );
-    };
+    Geolocation.getCurrentPosition(
+      position => {
+        setPosition(`${position.coords.latitude},${position.coords.longitude}`);
+      },
+      e => {
+        setError(e.message);
+      },
+    );
   }, []);
 
   return (
@@ -55,7 +52,13 @@ const HomeScreen = ({
       {isSearchBarOpen && (
         <SearchCityOptionsLayout cityName={debouncedSearchCityValue} />
       )}
-      {!error ? <Text>{position}</Text> : <Text>{error}</Text>}
+      {!error ? (
+        <>
+          <WeatherDashboard position={position} />
+        </>
+      ) : (
+        <Text>{error}</Text>
+      )}
     </View>
   );
 };
