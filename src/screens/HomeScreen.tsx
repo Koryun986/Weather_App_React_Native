@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import useDebounce from '../hooks/useDebounce';
 import SearchCityOptionsLayout from '../components/search-city/SearchCityOptionsLayout';
+import Geolocation from '@react-native-community/geolocation';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,6 +18,8 @@ const HomeScreen = ({
 }) => {
   const [searchCityValue, setSearchCityValue] = useState('');
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
+  const [error, setError] = useState<string>(null);
+  const [position, setPosition] = useState<string>(null);
   const debouncedSearchCityValue = useDebounce(searchCityValue);
 
   useEffect(() => {
@@ -30,12 +33,27 @@ const HomeScreen = ({
     });
   }, [navigation]);
 
+  useEffect(() => {
+    return () => {
+      Geolocation.getCurrentPosition(
+        position => {
+          setPosition(
+            `${position.coords.latitude},${position.coords.longitude}`,
+          );
+        },
+        e => {
+          setError(e.message);
+        },
+      );
+    };
+  }, []);
+
   return (
     <View style={styles.container}>
       {isSearchBarOpen && (
         <SearchCityOptionsLayout cityName={debouncedSearchCityValue} />
       )}
-      <Text>Home Screen</Text>
+      {!error ? <Text>{position}</Text> : <Text>{error}</Text>}
     </View>
   );
 };
