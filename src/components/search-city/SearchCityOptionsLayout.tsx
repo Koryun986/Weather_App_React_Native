@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   ScrollView,
   Text,
+  FlatList,
 } from 'react-native';
 import api from '../../api/index';
 import SearchCityOption from './SearchCityOption';
@@ -13,6 +14,7 @@ import {COLOR_PRIMARY} from '../../utils/styles/color-constants';
 
 interface SearchCityOptionsLayoutProps {
   cityName: string;
+  setCity: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const styles = StyleSheet.create({
@@ -27,6 +29,7 @@ const styles = StyleSheet.create({
 
 const SearchCityOptionsLayout: FC<SearchCityOptionsLayoutProps> = ({
   cityName,
+  setCity,
 }) => {
   const [searchOptions, setSearchOptions] = useState<City[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -74,11 +77,16 @@ const SearchCityOptionsLayout: FC<SearchCityOptionsLayoutProps> = ({
       ) : (
         <>
           {!!cityName.trim() && !!searchOptions.length && (
-            <ScrollView>
-              {searchOptions.map(searchOption => (
-                <SearchCityOption city={searchOption} key={searchOption.id} />
-              ))}
-            </ScrollView>
+            <FlatList
+              data={searchOptions}
+              renderItem={item => (
+                <SearchCityOption
+                  city={item.item}
+                  onPress={() => setCity(item.item.name)}
+                />
+              )}
+              keyExtractor={item => item.id}
+            />
           )}
         </>
       )}

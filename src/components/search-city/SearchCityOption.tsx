@@ -1,9 +1,10 @@
 import {FC} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 import type {City} from '../../types/api-types';
 
 interface SearchCityOptionProps {
   city: City;
+  onPress: () => void;
 }
 
 const styles = StyleSheet.create({
@@ -19,12 +20,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const SearchCityOption: FC<SearchCityOptionProps> = ({city}) => {
+const SearchCityOption: FC<SearchCityOptionProps> = ({city, onPress}) => {
   return (
-    <View style={styles.container}>
+    <Pressable
+      onPress={onPress}
+      style={({pressed}) => [{opacity: pressed ? 0.5 : 1}, styles.container]}>
       <Text style={styles.city}>{city.name}</Text>
       <Text>{city.country}</Text>
-    </View>
+    </Pressable>
   );
 };
 
